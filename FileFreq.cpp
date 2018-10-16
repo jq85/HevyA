@@ -1,3 +1,4 @@
+#include <stddef.h>// for NULL identifier
 #include <fstream>
 #include <iostream>
 #include "FileFreq.h"
@@ -11,7 +12,7 @@ FileFreq::FileFreq(std::string inputfilename)
 /*
 *
 */
-void FileFreq::read(std::istream & is)
+void FileFreq::read(std::istream &is)
 {
   is.read((char*)&m_char, sizeof(char));
 }
@@ -40,7 +41,7 @@ int FileFreq::findCharInCharArray(char current_char)
 */
 void FileFreq::appendToCharArray(char current_char)
 {
-  for(int i = 0; i < 29; i++)
+  for(unsigned int i = 0; i < sizeof(this->cfs.chars)/sizeof(this->cfs.chars[0]); i++)
   {
     if(this->cfs.chars[i]==NULL)
     {
@@ -101,6 +102,9 @@ void FileFreq::readFile()
             {
                 break;
             }
+            //transform character to lower case
+            this->m_char = tolower(this->m_char);
+            //count frequency
             increaseCharFrequencyCounter(this->m_char);
         }
         ifile.close();

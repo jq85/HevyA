@@ -14,7 +14,7 @@ ya me dices
 1. [OK] Take text file name as CLI input param.
 * [] Improve the class and clean the code.
 * [OK] Read file and count frequencies for each character.
-  * [] Take them all in lower case for reading.
+  * [OK] Take them all in lower case for reading.
   * [] Calculate relative frequencies.
 * [] Create text file to store relative frequencies for each character in the original text.
 * [] Turn it into a dynamic library.
