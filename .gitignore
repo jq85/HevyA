@@ -1,0 +1,8 @@
+# ignore compiled file
+*.exe
+
+# ignore bin folder
+bin/
+
+# ignore input and output text files
+*.txt
