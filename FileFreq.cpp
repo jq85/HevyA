@@ -88,26 +88,43 @@ void FileFreq::showFrequencies()
 */
 void FileFreq::readFile()
 {
-  std::ifstream ifile(this->inputfilename, std::ios_base::in);
-  if (ifile.is_open())
+  //Check if file exists:
+  if(this->file_exists(this->inputfilename))
   {
-      while (!ifile.eof())
-      {
-          this->read(ifile);
-          if (ifile.gcount() == 0)
-          {
-              break;
-          }
-          increaseCharFrequencyCounter(this->m_char);
-      }
-      ifile.close();
+    std::ifstream ifile(this->inputfilename, std::ios_base::in);
+    if (ifile.is_open())
+    {
+        while (!ifile.eof())
+        {
+            this->read(ifile);
+            if (ifile.gcount() == 0)
+            {
+                break;
+            }
+            increaseCharFrequencyCounter(this->m_char);
+        }
+        ifile.close();
 
-      std::cout << "Finished reading the data from the input file." << std::endl;
+        std::cout << "Finished reading the data from the input file." << std::endl;
 
-      showFrequencies();
+        showFrequencies();
+    }
+    else
+    {
+        std::cerr << "Couldn't open the input file for reading." << std::endl;
+    }
   }
   else
   {
-      std::cerr << "Couldn't open the input file for reading." << std::endl;
+    std::cerr << "\n\tFile does not exist." << std::endl;
   }
+}
+
+/*
+*
+*/
+bool FileFreq::file_exists(const std::string &name)
+{
+  std::ifstream f(this->inputfilename.c_str());
+  return f.good();
 }

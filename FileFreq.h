@@ -20,4 +20,5 @@ private:
   void increaseCharFrequencyCounter(char current_char);
   void showFrequencies();
   void appendToCharArray(char current_char);
+  bool file_exists(const std::string &name);
 };

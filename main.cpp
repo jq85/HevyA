@@ -6,6 +6,7 @@
 */
 int main(int argc, char *argv[])
 {
+  //Take second argument as input file name:
   FileFreq *ff = new FileFreq(argv[1]);
 
   ff->readFile();
