@@ -7,12 +7,14 @@ public:
   void readFile();
 
 private:
-  struct charfreqstr {
-    int length;
-    char chars[60];
-    int freqs[60];
+  static const unsigned int ASCII_SIZE = 128;
+  struct char_frequencies {
+    unsigned int length;
+    unsigned char character[ASCII_SIZE];
+    unsigned int frequency[ASCII_SIZE];
+    unsigned short relative_frequency[ASCII_SIZE];
   };
-  charfreqstr cfs = {60, {""}, {0}};
+  char_frequencies charfrequencies = {ASCII_SIZE, {""}, {0}};
   std::string inputfilename;
   char m_char;
   void read(std::istream & is);
@@ -21,4 +23,5 @@ private:
   void showFrequencies();
   void appendToCharArray(char current_char);
   bool file_exists(const std::string &name);
+  void calculateRelativeFrequency();
 };

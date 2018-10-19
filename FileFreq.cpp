@@ -23,11 +23,11 @@ void FileFreq::read(std::istream &is)
 int FileFreq::findCharInCharArray(char current_char)
 {
   int index = -1;
-  for (int i = 0; i < 59; i++)
+  for (int i = 0; i < ASCII_SIZE; i++)
   {
-    if(this->cfs.chars[i] == current_char)
+    if(this->charfrequencies.character[i] == current_char)
     {
-      std::cout << "Char in file is: " << current_char << ", and this->cfs.chars[" << i << "] is: " << this->cfs.chars[i] << ", with frequency: " << this->cfs.freqs[i] << std::endl;
+      std::cout << "Char in file is: " << current_char << ", and this->charfrequencies.character[" << i << "] is: " << this->charfrequencies.character[i] << ", with frequency: " << this->charfrequencies.frequency[i] << std::endl;
       index = i;
       break;
     }
@@ -41,12 +41,12 @@ int FileFreq::findCharInCharArray(char current_char)
 */
 void FileFreq::appendToCharArray(char current_char)
 {
-  for(unsigned int i = 0; i < sizeof(this->cfs.chars)/sizeof(this->cfs.chars[0]); i++)
+  for(unsigned int i = 0; i < sizeof(this->charfrequencies.character)/sizeof(this->charfrequencies.character[0]); i++)
   {
-    if(this->cfs.chars[i]==NULL)
+    if(this->charfrequencies.character[i]==NULL)
     {
-      this->cfs.chars[i] = current_char;
-      this->cfs.freqs[i] = 1;
+      this->charfrequencies.character[i] = current_char;
+      this->charfrequencies.frequency[i] = 1;
       break;
     }
   }
@@ -60,8 +60,8 @@ void FileFreq::increaseCharFrequencyCounter(char current_char)
   int index = findCharInCharArray(current_char);
   if(index > -1)
   {
-    this->cfs.chars[index] = current_char;
-    this->cfs.freqs[index]++;
+    this->charfrequencies.character[index] = current_char;
+    this->charfrequencies.frequency[index]++;
   }
   else if(index == -1)
   {
@@ -78,9 +78,9 @@ void FileFreq::increaseCharFrequencyCounter(char current_char)
 */
 void FileFreq::showFrequencies()
 {
-  for (int i = 0; i < 59; i++)
+  for (int i = 0; i < ASCII_SIZE; i++)
   {
-    std::cout << this->cfs.chars[i] << " : " << this->cfs.freqs[i] << std::endl;
+    std::cout << this->charfrequencies.character[i] << " : " << this->charfrequencies.frequency[i] << std::endl;
   }
 }
 
@@ -131,4 +131,12 @@ bool FileFreq::file_exists(const std::string &name)
 {
   std::ifstream f(this->inputfilename.c_str());
   return f.good();
+}
+
+/*
+*
+*/
+void calculateRelativeFrequency()
+{
+  
 }
