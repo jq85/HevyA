@@ -1,12 +1,14 @@
+#include "FileFreq.h"
 #include <stddef.h>// for NULL identifier
 #include <fstream>
 #include <iostream>
-#include "FileFreq.h"
+#include <stdexcept>
 
 // Constructor.
 FileFreq::FileFreq(std::string inputfilename)
   : inputfilename(inputfilename)
 {
+  // this->charfrequencies = {ASCII_SIZE, {""}, {0}, {0}};
 }
 
 /*
@@ -43,10 +45,12 @@ void FileFreq::appendNewCharToCharArray(char current_char)
 {
   for(unsigned int i = 0; i < sizeof(this->charfrequencies.character)/sizeof(this->charfrequencies.character[0]); i++)
   {
-    if(this->charfrequencies.character[i]==NULL)
+    if(this->charfrequencies.character[i]==0)//NOTE: comparing to 0 instead of NULL
     {
       this->charfrequencies.character[i] = current_char;
       this->charfrequencies.frequency[i] = 1;
+      this->charfrequencies.listOfUniqueCharslength++;
+      this->charfrequencies.totalNumberOfChars++;
       break;
     }
   }
@@ -57,11 +61,13 @@ void FileFreq::appendNewCharToCharArray(char current_char)
 */
 void FileFreq::increaseCharFrequencyCounter(char current_char)
 {
+  // char* position = std::find(this->charfrequencies.character, /*( this->charfrequencies.character + sizeof(this->charfrequencies.character) / sizeof(this->charfrequencies.character[0]) )*/, current_char);
   int index = findCharInCharArray(current_char);
   if(index > -1)
   {
     this->charfrequencies.character[index] = current_char;
     this->charfrequencies.frequency[index]++;
+    this->charfrequencies.totalNumberOfChars++;
   }
   else if(index == -1)
   {
@@ -69,7 +75,8 @@ void FileFreq::increaseCharFrequencyCounter(char current_char)
   }
   else
   {
-    std::cout << "ERROR" << std::endl;
+    // std::cout << "ERROR" << std::endl;
+    throw std::invalid_argument( "ERROR: non valid character" );
   }
 }
 
@@ -82,6 +89,7 @@ void FileFreq::showFrequencies()
   {
     std::cout << this->charfrequencies.character[i] << " : " << this->charfrequencies.frequency[i] << std::endl;
   }
+  std::cout << "listOfUniqueCharslength: " << this->charfrequencies.listOfUniqueCharslength << std::endl << "totalNumberOfChars: " << this->charfrequencies.totalNumberOfChars << std::endl;
 }
 
 /*
@@ -136,7 +144,10 @@ bool FileFreq::file_exists(const std::string &name)
 /*
 *
 */
-void calculateRelativeFrequency()
+void FileFreq::calculateRelativeFrequency()
 {
-  
+  // for (unsigned int i = 0; i < this->charfrequencies.listOfUniqueCharslength; i++)
+  // {
+  //   // this->
+  // }
 }

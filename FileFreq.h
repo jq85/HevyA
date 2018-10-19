@@ -9,12 +9,13 @@ public:
 private:
   static const unsigned int ASCII_SIZE = 128;
   struct char_frequencies {
-    unsigned int length;
+    unsigned int listOfUniqueCharslength;
+    unsigned int totalNumberOfChars;
     unsigned char character[ASCII_SIZE];
     unsigned int frequency[ASCII_SIZE];
     unsigned short relative_frequency[ASCII_SIZE];
   };
-  char_frequencies charfrequencies = {ASCII_SIZE, {""}, {0}};
+  char_frequencies charfrequencies = {0, 0, {""}, {0}, {0}};
   std::string inputfilename;
   char m_char;
   void read(std::istream & is);
