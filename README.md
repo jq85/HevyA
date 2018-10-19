@@ -13,8 +13,9 @@ ya me dices
 # TASKS
 1. [OK] Take text file name as CLI input param.
 * [] Improve the class and clean the code.
+  * [] Compare every input character with ASCII values, and discard useless characters.
 * [OK] Read file and count frequencies for each character.
   * [OK] Take them all in lower case for reading.
-  * [] Calculate relative frequencies.
+  * [OK] Calculate relative frequencies.
 * [] Create text file to store relative frequencies for each character in the original text.
 * [] Turn it into a dynamic library.

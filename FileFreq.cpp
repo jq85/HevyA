@@ -27,14 +27,13 @@ int FileFreq::findCharInCharArray(char current_char)
   int index = -1;
   for (int i = 0; i < ASCII_SIZE; i++)
   {
-    if(this->charfrequencies.character[i] == current_char)
+    if(this->characters.character[i] == current_char)
     {
-      std::cout << "Char in file is: " << current_char << ", and this->charfrequencies.character[" << i << "] is: " << this->charfrequencies.character[i] << ", with frequency: " << this->charfrequencies.frequency[i] << std::endl;
+      // std::cout << "input char: " << current_char << ", match[" << i << "]: " << this->characters.character[i] << ", abs freq: " << this->characters.absoluteFrequency[i] << ", rel freq: " << this->characters.relativeFrequency[i] << " " << std::endl;
       index = i;
       break;
     }
   }
-
   return index;
 }
 
@@ -43,14 +42,14 @@ int FileFreq::findCharInCharArray(char current_char)
 */
 void FileFreq::appendNewCharToCharArray(char current_char)
 {
-  for(unsigned int i = 0; i < sizeof(this->charfrequencies.character)/sizeof(this->charfrequencies.character[0]); i++)
+  for(unsigned int i = 0; i < sizeof(this->characters.character)/sizeof(this->characters.character[0]); i++)
   {
-    if(this->charfrequencies.character[i]==0)//NOTE: comparing to 0 instead of NULL
+    if(this->characters.character[i]==0)//NOTE: comparing to 0 instead of NULL
     {
-      this->charfrequencies.character[i] = current_char;
-      this->charfrequencies.frequency[i] = 1;
-      this->charfrequencies.listOfUniqueCharslength++;
-      this->charfrequencies.totalNumberOfChars++;
+      this->characters.totalNumberOfUniqueChars++;
+      this->characters.totalNumberOfChars++;
+      this->characters.character[i] = current_char;
+      this->characters.absoluteFrequency[i] = 1;
       break;
     }
   }
@@ -61,13 +60,13 @@ void FileFreq::appendNewCharToCharArray(char current_char)
 */
 void FileFreq::increaseCharFrequencyCounter(char current_char)
 {
-  // char* position = std::find(this->charfrequencies.character, /*( this->charfrequencies.character + sizeof(this->charfrequencies.character) / sizeof(this->charfrequencies.character[0]) )*/, current_char);
+  // char* position = std::find(this->characters.character, /*( this->characters.character + sizeof(this->characters.character) / sizeof(this->characters.character[0]) )*/, current_char);
   int index = findCharInCharArray(current_char);
   if(index > -1)
   {
-    this->charfrequencies.character[index] = current_char;
-    this->charfrequencies.frequency[index]++;
-    this->charfrequencies.totalNumberOfChars++;
+    this->characters.totalNumberOfChars++;
+    this->characters.absoluteFrequency[index]++;
+    // std::cout << "abs freq: " << this->characters.absoluteFrequency[index] << ", tot No Chars: " << this->characters.totalNumberOfChars << std::endl;
   }
   else if(index == -1)
   {
@@ -76,7 +75,7 @@ void FileFreq::increaseCharFrequencyCounter(char current_char)
   else
   {
     // std::cout << "ERROR" << std::endl;
-    throw std::invalid_argument( "ERROR: non valid character" );
+    throw std::invalid_argument( "ERROR: unknown error." );
   }
 }
 
@@ -85,11 +84,17 @@ void FileFreq::increaseCharFrequencyCounter(char current_char)
 */
 void FileFreq::showFrequencies()
 {
+  float tmp = 0;
+  std::cout << std::endl << "char, abs freq, rel freq:" << std::endl;
   for (int i = 0; i < ASCII_SIZE; i++)
   {
-    std::cout << this->charfrequencies.character[i] << " : " << this->charfrequencies.frequency[i] << std::endl;
+    if (this->characters.character[i] != 0)
+    {
+      std::cout << this->characters.character[i] << ", " << this->characters.absoluteFrequency[i] << ", " << this->characters.relativeFrequency[i] << std::endl;
+    }
+    tmp = tmp + this->characters.relativeFrequency[i];
   }
-  std::cout << "listOfUniqueCharslength: " << this->charfrequencies.listOfUniqueCharslength << std::endl << "totalNumberOfChars: " << this->charfrequencies.totalNumberOfChars << std::endl;
+  // std::cout << "totalNumberOfUniqueChars: " << this->characters.totalNumberOfUniqueChars << std::endl << "totalNumberOfChars: " << this->characters.totalNumberOfChars << ", tmp: " << tmp << std::endl;
 }
 
 /*
@@ -119,6 +124,7 @@ void FileFreq::readFile()
 
         std::cout << "Finished reading the data from the input file." << std::endl;
 
+        calculateRelativeFrequencies();
         showFrequencies();
     }
     else
@@ -144,10 +150,31 @@ bool FileFreq::file_exists(const std::string &name)
 /*
 *
 */
-void FileFreq::calculateRelativeFrequency()
+void FileFreq::calculateRelativeFrequencies()
 {
-  // for (unsigned int i = 0; i < this->charfrequencies.listOfUniqueCharslength; i++)
-  // {
-  //   // this->
-  // }
+  for (unsigned int i = 0; i < this->characters.totalNumberOfUniqueChars; i++)
+  {
+    this->characters.relativeFrequency[i] = ((float)this->characters.absoluteFrequency[i]/(float)this->characters.totalNumberOfChars);
+    // std::cout << "abs freq: " << this->characters.absoluteFrequency[i] << ", tot No Chars: " << this->characters.totalNumberOfChars << ", rel freq: " << this->characters.relativeFrequency[i] << std::endl;
+  }
+}
+
+/*
+* NOTE: GETTERS AND SETTERS
+*/
+
+/*
+*
+*/
+unsigned int FileFreq::getTotalNumberOfUniqueChars()
+{
+  return this->characters.totalNumberOfUniqueChars;
+}
+
+/*
+*
+*/
+unsigned long FileFreq::getTotalNumberOfChars()
+{
+  return this->characters.totalNumberOfChars;
 }

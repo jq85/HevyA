@@ -1,21 +1,24 @@
 #include <iostream>
+#include <limits.h>
 
 class FileFreq
 {
 public:
   FileFreq(std::string inputfilename);
   void readFile();
+  unsigned int getTotalNumberOfUniqueChars();
+  unsigned long getTotalNumberOfChars();
 
 private:
   static const unsigned int ASCII_SIZE = 128;
-  struct char_frequencies {
-    unsigned int listOfUniqueCharslength;
-    unsigned int totalNumberOfChars;
+  struct file_characters {
+    unsigned int totalNumberOfUniqueChars;
+    unsigned long totalNumberOfChars;
     unsigned char character[ASCII_SIZE];
-    unsigned int frequency[ASCII_SIZE];
-    unsigned short relative_frequency[ASCII_SIZE];
+    unsigned long absoluteFrequency[ASCII_SIZE];
+    float relativeFrequency[ASCII_SIZE];
   };
-  char_frequencies charfrequencies = {0, 0, {""}, {0}, {0}};
+  file_characters characters = {0, 0, {""}, {0}, {0}};
   std::string inputfilename;
   char m_char;
   void read(std::istream & is);
@@ -24,5 +27,5 @@ private:
   void showFrequencies();
   void appendNewCharToCharArray(char current_char);
   bool file_exists(const std::string &name);
-  void calculateRelativeFrequency();
+  void calculateRelativeFrequencies();
 };

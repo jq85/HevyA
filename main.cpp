@@ -14,8 +14,9 @@ int main(int argc, char *argv[])
   std::cout << "You have entered " << argc << " arguments:" << std::endl;
   for (int i = 0; i < argc; ++i)
   {
-      std::cout << argv[i] << std::endl;
+      std::cout << "\t- " << argv[i] << std::endl;
   }
+  std::cout << "The input file is " << ff->getTotalNumberOfChars() << " characters long, and it has " << ff->getTotalNumberOfUniqueChars() << " unique characters." << std::endl << std::endl;
 
   return 0;
 }
