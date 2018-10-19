@@ -21,7 +21,7 @@ private:
   int findCharInCharArray(char current_char);
   void increaseCharFrequencyCounter(char current_char);
   void showFrequencies();
-  void appendToCharArray(char current_char);
+  void appendNewCharToCharArray(char current_char);
   bool file_exists(const std::string &name);
   void calculateRelativeFrequency();
 };

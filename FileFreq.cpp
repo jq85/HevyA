@@ -39,7 +39,7 @@ int FileFreq::findCharInCharArray(char current_char)
 /*
 *
 */
-void FileFreq::appendToCharArray(char current_char)
+void FileFreq::appendNewCharToCharArray(char current_char)
 {
   for(unsigned int i = 0; i < sizeof(this->charfrequencies.character)/sizeof(this->charfrequencies.character[0]); i++)
   {
@@ -65,7 +65,7 @@ void FileFreq::increaseCharFrequencyCounter(char current_char)
   }
   else if(index == -1)
   {
-    appendToCharArray(current_char);
+    appendNewCharToCharArray(current_char);
   }
   else
   {
