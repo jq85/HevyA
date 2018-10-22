@@ -17,5 +17,5 @@ ya me dices
 * [OK] Read file and count frequencies for each character.
   * [OK] Take them all in lower case for reading.
   * [OK] Calculate relative frequencies.
-* [] Create text file to store relative frequencies for each character in the original text.
+* [OK] Create text file to store relative frequencies for each character in the original text.
 * [] Turn it into a dynamic library.
