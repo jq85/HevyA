@@ -77,7 +77,7 @@ void FileFreq::increaseCharFrequencyCounter(char current_char)
 /*
 *
 */
-void FileFreq::showFrequencies()
+void FileFreq::printFrequencies()
 {
   float tmp = 0;
   std::cout << std::endl << "char, abs freq, rel freq:" << std::endl;
@@ -121,7 +121,7 @@ int FileFreq::parseFile()
         std::cout << "Finished reading the data from the input file." << std::endl;
 
         calculateRelativeFrequencies();
-        showFrequencies();
+        printFrequencies();
         ret_val = 0;//No errors
     }
     else

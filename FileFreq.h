@@ -25,7 +25,7 @@ private:
   void read(std::istream & is);
   int findCharInCharArray(char current_char);
   void increaseCharFrequencyCounter(char current_char);
-  void showFrequencies();
+  void printFrequencies();
   void appendNewCharToCharArray(char current_char);
   bool file_exists(const std::string &name);
   void calculateRelativeFrequencies();
