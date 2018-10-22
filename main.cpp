@@ -6,10 +6,12 @@
 */
 int main(int argc, char *argv[])
 {
+  int ret_val = -1;
   //Take second argument as input file name:
   FileFreq *ff = new FileFreq(argv[1]);
 
-  ff->readFile();
+  // READ FILE, AND PARSE AND ANALYZE CHARACTERS
+  ret_val = ff->parseFile();
 
   std::cout << "You have entered " << argc << " arguments:" << std::endl;
   for (int i = 0; i < argc; ++i)
@@ -18,5 +20,10 @@ int main(int argc, char *argv[])
   }
   std::cout << "The input file is " << ff->getTotalNumberOfChars() << " characters long, and it has " << ff->getTotalNumberOfUniqueChars() << " unique characters." << std::endl << std::endl;
 
-  return 0;
+  // std::cout << "\n\n\t" << ret_val << "\n";
+
+  // WRITE RESULTS TO CSV FILE
+  // ret_val = ff->writeResultsToOutputFile();
+
+  return ret_val;
 }

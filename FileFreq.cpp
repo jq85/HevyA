@@ -72,11 +72,6 @@ void FileFreq::increaseCharFrequencyCounter(char current_char)
   {
     appendNewCharToCharArray(current_char);
   }
-  else
-  {
-    // std::cout << "ERROR" << std::endl;
-    throw std::invalid_argument( "ERROR: unknown error." );
-  }
 }
 
 /*
@@ -100,8 +95,9 @@ void FileFreq::showFrequencies()
 /*
 *
 */
-void FileFreq::readFile()
+int FileFreq::parseFile()
 {
+  int ret_val = -1;
   //Check if file exists:
   if(this->file_exists(this->inputfilename))
   {
@@ -126,16 +122,20 @@ void FileFreq::readFile()
 
         calculateRelativeFrequencies();
         showFrequencies();
+        ret_val = 0;//No errors
     }
     else
     {
         std::cerr << "Couldn't open the input file for reading." << std::endl;
+        ret_val = -1;
     }
   }
   else
   {
     std::cerr << "\n\tFile does not exist." << std::endl;
+    ret_val = -1;
   }
+  return ret_val;
 }
 
 /*
@@ -178,3 +178,10 @@ unsigned long FileFreq::getTotalNumberOfChars()
 {
   return this->characters.totalNumberOfChars;
 }
+
+// int FileFreq::writeResultsToOutputFile()
+// {
+//   int ret_val = -1;
+//
+//   return ret_val;
+// }

@@ -5,9 +5,10 @@ class FileFreq
 {
 public:
   FileFreq(std::string inputfilename);
-  void readFile();
+  int parseFile();
   unsigned int getTotalNumberOfUniqueChars();
   unsigned long getTotalNumberOfChars();
+  // int writeResultsToOutputFile();
 
 private:
   static const unsigned int ASCII_SIZE = 128;
