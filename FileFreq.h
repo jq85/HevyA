@@ -10,7 +10,7 @@ public:
   unsigned int getTotalNumberOfUniqueChars();
   unsigned long getTotalNumberOfChars();
   int writeResultsToOutputCsvFile();
-  // void getRelativeFrequencies(float *relativeFrequency[]);
+  void getRelativeFrequencies(float relativeFrequency[]);
 
 private:
   static const unsigned int ASCII_SIZE = 128;

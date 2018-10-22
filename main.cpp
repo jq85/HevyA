@@ -35,5 +35,13 @@ int main(int argc, char *argv[])
 
   // std::cout << "\n\t" << ret_val << "\n";
 
+  // TRYING GETTER
+  float relativeFrequency[128];
+  ff->getRelativeFrequencies(relativeFrequency);
+  for (int i = 0; i < 128; i++)
+  {
+    std::cout << relativeFrequency[i] << std::endl;
+  }
+
   return ret_val;
 }

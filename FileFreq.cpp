@@ -4,6 +4,9 @@
 #include <iostream>
 #include <stdexcept>
 
+#include <cstdint>
+#include <cstring>
+
 // Constructor.
 FileFreq::FileFreq(std::string inputfilename)
   : inputfilename(inputfilename), outputfilename("outputfile.txt")
@@ -101,16 +104,10 @@ void FileFreq::printRelativeFrequencies()
 /*
 *
 */
-// void FileFreq::getRelativeFrequencies(float *relativeFrequency[])
-// {
-  // relativeFrequency = this->characters.relativeFrequency;
-  // int i = 0;
-  // while(i < this->characters.totalNumberOfUniqueChars)
-  // {
-  //   *relativeFrequency[i] = this->characters.relativeFrequency[i];
-  // }
-  // std::cout << "totalNumberOfUniqueChars: " << this->characters.totalNumberOfUniqueChars << std::endl << "totalNumberOfChars: " << this->characters.totalNumberOfChars << ", tmp: " << tmp << std::endl;
-// }
+void FileFreq::getRelativeFrequencies(float relativeFrequency[])
+{
+  std::memcpy(relativeFrequency, this->characters.relativeFrequency, sizeof(float)*128);
+}
 
 /*
 *
