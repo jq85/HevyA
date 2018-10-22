@@ -8,7 +8,15 @@ int main(int argc, char *argv[])
 {
   int ret_val = -1;
   //Take second argument as input file name:
-  FileFreq *ff = new FileFreq(argv[1]);
+  FileFreq *ff;
+  if((argv[1]!=0) && (argv[2]==0))
+  {
+    ff = new FileFreq(argv[1]);
+  }
+  else if((argv[1]!=0) && (argv[2]!=0))
+  {
+    ff = new FileFreq(argv[1], argv[2]);
+  }
 
   // READ FILE, AND PARSE AND ANALYZE CHARACTERS
   ret_val = ff->parseFile();
@@ -23,7 +31,7 @@ int main(int argc, char *argv[])
   // std::cout << "\n\n\t" << ret_val << "\n";
 
   // WRITE RESULTS TO CSV FILE
-  // ret_val = ff->writeResultsToOutputFile();
+  ret_val = ff->writeResultsToOutputCsvFile();
 
   // std::cout << "\n\t" << ret_val << "\n";
 

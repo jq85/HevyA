@@ -6,7 +6,13 @@
 
 // Constructor.
 FileFreq::FileFreq(std::string inputfilename)
-  : inputfilename(inputfilename)
+  : inputfilename(inputfilename), outputfilename("outputfile.txt")
+{
+  // this->charfrequencies = {ASCII_SIZE, {""}, {0}, {0}};
+}
+
+FileFreq::FileFreq(std::string inputfilename, std::string outputfilename)
+  : inputfilename(inputfilename), outputfilename(outputfilename)
 {
   // this->charfrequencies = {ASCII_SIZE, {""}, {0}, {0}};
 }
@@ -92,7 +98,19 @@ void FileFreq::printRelativeFrequencies()
   // std::cout << "totalNumberOfUniqueChars: " << this->characters.totalNumberOfUniqueChars << std::endl << "totalNumberOfChars: " << this->characters.totalNumberOfChars << ", tmp: " << tmp << std::endl;
 }
 
-
+/*
+*
+*/
+// void FileFreq::getRelativeFrequencies(float *relativeFrequency[])
+// {
+  // relativeFrequency = this->characters.relativeFrequency;
+  // int i = 0;
+  // while(i < this->characters.totalNumberOfUniqueChars)
+  // {
+  //   *relativeFrequency[i] = this->characters.relativeFrequency[i];
+  // }
+  // std::cout << "totalNumberOfUniqueChars: " << this->characters.totalNumberOfUniqueChars << std::endl << "totalNumberOfChars: " << this->characters.totalNumberOfChars << ", tmp: " << tmp << std::endl;
+// }
 
 /*
 *
@@ -181,9 +199,23 @@ unsigned long FileFreq::getTotalNumberOfChars()
   return this->characters.totalNumberOfChars;
 }
 
-int FileFreq::writeResultsToOutputFile()
+int FileFreq::writeResultsToOutputCsvFile()
 {
   int ret_val = -1;
-
+  std::ofstream ofile(this->outputfilename);
+  if (ofile.is_open())
+  {
+    ofile << "char, abs freq, rel freq" << std::endl;
+    for (int i = 0; i < ASCII_SIZE; i++)
+    {
+      ofile << this->characters.character[i] << ", " << this->characters.absoluteFrequency[i] << ", " << this->characters.relativeFrequency[i] << std::endl;
+    }
+    ofile.close();
+    std::cout << "Finished writing text to the output file." << std::endl;
+  }
+  else
+  {
+      std::cerr << "Couldn't open the output file for writing." << std::endl;
+  }
   return ret_val;
 }

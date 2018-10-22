@@ -5,11 +5,12 @@ class FileFreq
 {
 public:
   FileFreq(std::string inputfilename);
+  FileFreq(std::string inputfilename, std::string outputfilename);
   int parseFile();
   unsigned int getTotalNumberOfUniqueChars();
   unsigned long getTotalNumberOfChars();
-  int writeResultsToOutputFile();
-  // int getRelativeFrequencies(float *relativeFrequency[]);
+  int writeResultsToOutputCsvFile();
+  // void getRelativeFrequencies(float *relativeFrequency[]);
 
 private:
   static const unsigned int ASCII_SIZE = 128;
@@ -22,6 +23,7 @@ private:
   };
   file_characters characters = {0, 0, {""}, {0}, {0}};
   std::string inputfilename;
+  std::string outputfilename;
   char m_char;
   void read(std::istream & is);
   int findCharInCharArray(char current_char);
