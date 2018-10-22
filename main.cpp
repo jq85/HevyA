@@ -25,5 +25,7 @@ int main(int argc, char *argv[])
   // WRITE RESULTS TO CSV FILE
   // ret_val = ff->writeResultsToOutputFile();
 
+  // std::cout << "\n\t" << ret_val << "\n";
+
   return ret_val;
 }

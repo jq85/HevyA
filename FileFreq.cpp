@@ -179,9 +179,9 @@ unsigned long FileFreq::getTotalNumberOfChars()
   return this->characters.totalNumberOfChars;
 }
 
-// int FileFreq::writeResultsToOutputFile()
-// {
-//   int ret_val = -1;
-//
-//   return ret_val;
-// }
+int FileFreq::writeResultsToOutputFile()
+{
+  int ret_val = -1;
+
+  return ret_val;
+}

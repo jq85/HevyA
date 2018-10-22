@@ -8,7 +8,7 @@ public:
   int parseFile();
   unsigned int getTotalNumberOfUniqueChars();
   unsigned long getTotalNumberOfChars();
-  // int writeResultsToOutputFile();
+  int writeResultsToOutputFile();
 
 private:
   static const unsigned int ASCII_SIZE = 128;
