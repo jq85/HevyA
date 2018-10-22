@@ -9,6 +9,7 @@ public:
   unsigned int getTotalNumberOfUniqueChars();
   unsigned long getTotalNumberOfChars();
   int writeResultsToOutputFile();
+  // int getRelativeFrequencies(float *relativeFrequency[]);
 
 private:
   static const unsigned int ASCII_SIZE = 128;
@@ -25,7 +26,7 @@ private:
   void read(std::istream & is);
   int findCharInCharArray(char current_char);
   void increaseCharFrequencyCounter(char current_char);
-  void printFrequencies();
+  void printRelativeFrequencies();
   void appendNewCharToCharArray(char current_char);
   bool file_exists(const std::string &name);
   void calculateRelativeFrequencies();
