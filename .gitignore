@@ -6,3 +6,4 @@ bin/
 
 # ignore input and output text files
 *.txt
+*.csv
