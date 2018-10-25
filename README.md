@@ -20,3 +20,12 @@ ya me dices
   * [OK] Calculate relative frequencies.
 * [OK] Create text file to store relative frequencies for each character in the original text.
 * [] Turn it into a dynamic library.
+
+# How to use
+Create an instance of the FileFreq class, initializing it with the name of the input file as first parameter, and an optional second parameter for the output file name (including extension .txt, .csv, as you wish); If no second parameter is given the overloaded constructor creates a default output file named "outputfile.txt".
+
+Then call the method *parseFile()* to analyze the absolute and relative frequencies of the characters in the input file, and finally call *writeResultsToOutputCsvFile()* to write the results of the analysis to the output file; the content is in CSV style with one row for every *character, absolute frequency, relative frequency*.
+
+Constructors: FileFreq('inputfile.txt'), FileFreq('inputfile.txt', 'outputfile.csv')
+Main methods: parseFile(), writeResultsToOutputCsvFile().
+Output file content: rows with: character, absolute frequency, relative frequency.
