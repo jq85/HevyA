@@ -26,6 +26,6 @@ Create an instance of the FileFreq class, initializing it with the name of the i
 
 Then call the method *parseFile()* to analyze the absolute and relative frequencies of the characters in the input file, and finally call *writeResultsToOutputCsvFile()* to write the results of the analysis to the output file; the content is in CSV style with one row for every *character, absolute frequency, relative frequency*.
 
-Constructors: FileFreq('inputfile.txt'), FileFreq('inputfile.txt', 'outputfile.csv')
-Main methods: parseFile(), writeResultsToOutputCsvFile().
-Output file content: rows with: character, absolute frequency, relative frequency.
+ - **Constructors**: FileFreq('inputfile.txt'), FileFreq('inputfile.txt', 'outputfile.csv')
+ - **Main methods**: parseFile(), writeResultsToOutputCsvFile().
+ - **Output file content**: rows with: character, absolute frequency, relative frequency.
