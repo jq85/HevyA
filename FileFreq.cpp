@@ -116,41 +116,51 @@ int FileFreq::parseFile()
 {
   int ret_val = -1;
   //Check if file exists:
-  if(this->file_exists(this->inputfilename))
+  try
   {
-    std::ifstream ifile(this->inputfilename, std::ios_base::in);
-    if (ifile.is_open())
+    if(this->file_exists(this->inputfilename))
     {
-        while (!ifile.eof())
-        {
-            this->read(ifile);
-            if (ifile.gcount() == 0)
-            {
-                break;
-            }
-            //transform character to lower case
-            this->m_char = tolower(this->m_char);
-            //count frequency
-            increaseCharFrequencyCounter(this->m_char);
-        }
-        ifile.close();
+      std::ifstream ifile(this->inputfilename, std::ios_base::in);
+      if (ifile.is_open())
+      {
+          while (!ifile.eof())
+          {
+              this->read(ifile);
+              if (ifile.gcount() == 0)
+              {
+                  break;
+              }
+              //transform character to lower case
+              this->m_char = tolower(this->m_char);
+              //count frequency
+              increaseCharFrequencyCounter(this->m_char);
+          }
+          ifile.close();
 
-        std::cout << "Finished reading the data from the input file." << std::endl;
+          std::cout << "Finished reading the data from the input file." << std::endl;
 
-        calculateRelativeFrequencies();
-        printRelativeFrequencies();
-        ret_val = 0;//No errors
+          calculateRelativeFrequencies();
+          printRelativeFrequencies();
+          ret_val = 0;//No errors
+      }
+      else
+      {
+          // std::cerr << "Couldn't open the input file for reading." << std::endl;
+          throw (std::string("Couldn't open the input file for reading."));
+          ret_val = -1;
+      }
     }
     else
     {
-        std::cerr << "Couldn't open the input file for reading." << std::endl;
-        ret_val = -1;
+      // std::cerr << "\n\tFile does not exist." << std::endl;
+      throw (std::string("The input file does not exist."));
+      ret_val = -1;
     }
   }
-  else
+  catch(const std::string &e)
   {
-    std::cerr << "\n\tFile does not exist." << std::endl;
-    ret_val = -1;
+    std::cout << "\n\t" << e << "\n\t" << std::endl;
+    exit (EXIT_FAILURE);
   }
   return ret_val;
 }
@@ -199,20 +209,30 @@ unsigned long FileFreq::getTotalNumberOfChars()
 int FileFreq::writeResultsToOutputCsvFile()
 {
   int ret_val = -1;
-  std::ofstream ofile(this->outputfilename);
-  if (ofile.is_open())
+  try
   {
-    ofile << "char, abs freq, rel freq" << std::endl;
-    for (int i = 0; i < ASCII_SIZE; i++)
+    std::ofstream ofile(this->outputfilename);
+    if (ofile.is_open())
     {
-      ofile << this->characters.character[i] << ", " << this->characters.absoluteFrequency[i] << ", " << this->characters.relativeFrequency[i] << std::endl;
+      ofile << "char, abs freq, rel freq" << std::endl;
+      for (int i = 0; i < ASCII_SIZE; i++)
+      {
+        ofile << this->characters.character[i] << ", " << this->characters.absoluteFrequency[i] << ", " << this->characters.relativeFrequency[i] << std::endl;
+      }
+      ofile.close();
+      std::cout << "Finished writing text to the output file." << std::endl;
     }
-    ofile.close();
-    std::cout << "Finished writing text to the output file." << std::endl;
+    else
+    {
+        // std::cerr << "Couldn't open the output file for writing." << std::endl;
+        throw (std::string("Couldn't open the output file for writing."));
+    }
   }
-  else
+  catch(const std::string &e)
   {
-      std::cerr << "Couldn't open the output file for writing." << std::endl;
+    std::cout << "\n\t" << e << "\n\t" << std::endl;
+    exit (EXIT_FAILURE);
   }
+
   return ret_val;
 }
